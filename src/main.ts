@@ -3,7 +3,7 @@ import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createPinia } from "pinia";
 import VueFeather from "vue-feather";
 
-import "./style.css";
+import "./styles/style.css";
 import App from "./App.vue";
 import router from "./router";
 

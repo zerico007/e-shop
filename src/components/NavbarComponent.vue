@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store";
-import Button from "../components/ButtonComponent.vue";
+import Cart from "./CartComponent.vue";
+import Button from "./ButtonComponent.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -17,6 +18,7 @@ function logout() {
     <span v-if="userStore.user.isLoggedIn"
       >Welcome back, {{ userStore.user.username }}</span
     >
+    <Cart v-if="userStore.user.isLoggedIn" />
     <Button
       v-if="userStore.user.isLoggedIn"
       theme="secondary"
@@ -28,7 +30,7 @@ function logout() {
 </template>
 <style lang="scss" scoped>
 .nav-bar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

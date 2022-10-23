@@ -1,3 +1,5 @@
+@import "./animations.css";
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -80,6 +82,11 @@ input:focus-visible {
 
 .btn-body span {
   font-weight: bolder;
+}
+
+.btn-body:hover i {
+  transform: translateX(0.5em);
+  transition: all 0.3s ease-in-out;
 }
 
 .app-container {

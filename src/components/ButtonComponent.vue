@@ -42,11 +42,6 @@ button {
   font-weight: bold;
   font-size: 1rem;
 
-  &:focus,
-  &:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-  }
-
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;

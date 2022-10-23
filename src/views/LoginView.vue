@@ -68,18 +68,6 @@ watch(isSuccess, (success) => {
     width: 50%;
   }
 
-  .login-btn-div {
-    i {
-      transition: all 0.2s ease-in-out;
-    }
-  }
-
-  .login-btn-div:hover {
-    i {
-      transform: translateX(0.5rem);
-    }
-  }
-
   .error {
     color: red;
   }

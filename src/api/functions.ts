@@ -76,6 +76,7 @@ export const updateProductAvailability = async (
 
 export const addToCart = async (productId: string, quantity: number) => {
   const params = { product: productId, quantity };
+  console.log(params);
   const { data } = await shopAPI.post("/cart", params);
   return data;
 };

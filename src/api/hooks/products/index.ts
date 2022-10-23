@@ -8,7 +8,7 @@ export function useProducts(enabled = true) {
     isFetching,
     isSuccess,
     refetch: fetchProducts,
-  } = useQuery(["products"], getProducts, {
+  } = useQuery<Product[], Error>(["products"], getProducts, {
     refetchOnWindowFocus: false,
     retry: 1,
     onError: (error: unknown) => console.error(error),
