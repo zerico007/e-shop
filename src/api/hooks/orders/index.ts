@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
 import { placeOrder } from "../../functions";
+import { toaster } from "../../../utils";
 
 export function usePlaceOrder(onSuccess?: (data?: any) => void) {
   const queryClient = useQueryClient();
@@ -10,6 +11,7 @@ export function usePlaceOrder(onSuccess?: (data?: any) => void) {
       onSuccess: (data: any) => {
         queryClient.invalidateQueries(["cart"]);
         queryClient.invalidateQueries(["orders"]);
+        toaster.success("Order placed!");
         onSuccess?.(data);
       },
     }

@@ -25,3 +25,4 @@ interface Cart {
 }
 
 declare module "vue-select";
+declare module "@meforma/vue-toaster";

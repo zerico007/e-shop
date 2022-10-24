@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import Button from "../components/ButtonComponent.vue";
 import { useLogin, setBearerToken } from "../api";
 import { useUserStore } from "../store";
+import { toaster } from "../utils";
 
 const email = ref("");
 const password = ref("");
@@ -21,6 +22,7 @@ watch(isSuccess, (success) => {
   if (success) {
     // redirect to home page
     console.log("login successful");
+    toaster.success("Login successful");
     router.push("home");
     // clear form
     email.value = "";

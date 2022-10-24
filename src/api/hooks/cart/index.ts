@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/vue-query";
 import { getCart, addToCart, deleteFromCart } from "../../functions";
+import { toaster } from "../../../utils";
 
 export function useCart(enabled = true) {
   const {
@@ -33,6 +34,7 @@ export function useAddToCart(onSuccess?: (data?: any) => void) {
       onError: (error: unknown) => console.log(error),
       onSuccess: (data: any) => {
         queryClient.invalidateQueries(["cart"]);
+        toaster.success("Product added to cart");
         onSuccess?.(data);
       },
     }
@@ -53,6 +55,7 @@ export function useDeleteFromCart(onSuccess?: (data?: any) => void) {
       onError: (error: unknown) => console.log(error),
       onSuccess: (data: any) => {
         queryClient.invalidateQueries(["cart"]);
+        toaster.success("Product removed from cart");
         onSuccess?.(data);
       },
     }
