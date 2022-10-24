@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
 import Button from "../components/ButtonComponent.vue";
@@ -25,6 +25,13 @@ watch(isSuccess, (success) => {
     // clear form
     email.value = "";
     password.value = "";
+  }
+});
+
+onMounted(() => {
+  // check if user is already logged in
+  if (userStore.user.isLoggedIn) {
+    router.push("home");
   }
 });
 </script>
