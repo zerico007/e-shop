@@ -12,16 +12,24 @@ const isMenuOpen = ref(false);
 
 const menuLinks = [
   {
+    name: "Home",
+    link: "/e-shop/home/",
+    icon: "home",
+  },
+  {
     name: "Orders",
     link: "/e-shop/orders/",
+    icon: "shopping-bag",
   },
   {
     name: "Products",
     link: "/e-shop/products/",
+    icon: "smartphone",
   },
   {
     name: "Change Password",
     link: "/e-shop/change-password/",
+    icon: "lock",
   },
 ];
 
@@ -40,24 +48,36 @@ function logout() {
       <h2>E-Shop</h2>
     </router-link>
 
-    <div v-if="userStore.user.isLoggedIn" class="authenticated-nav">
-      <span>Welcome back, {{ userStore.user.username }}</span>
-      <Button theme="secondary" :onClick="toggleMenu">
-        <vue-feather :type="isMenuOpen ? 'x' : 'menu'" size="20px" />
-      </Button>
-      <Cart />
-      <Button theme="secondary" :onClick="logout">
-        <vue-feather type="log-out" size="20px" />
-      </Button>
+    <div
+      v-if="userStore.user.isLoggedIn"
+      class="authenticated-nav"
+      :class="isMenuOpen ? 'hidden' : ''"
+    >
+      <div class="icons" :class="isMenuOpen ? 'hidden' : ''">
+        <Button theme="secondary" :onClick="toggleMenu">
+          <vue-feather type="menu" size="20px" />
+        </Button>
+        <Cart />
+      </div>
+
       <div
         :class="isMenuOpen ? 'menu-body open' : 'menu-body'"
         @click="toggleMenu"
       >
+        <vue-feather class="close-menu" type="x" size="30px" />
+        <span>Welcome back, {{ userStore.user.username }}</span>
         <router-link v-for="link in menuLinks" :key="link.name" :to="link.link">
           <div class="menu-link">
-            {{ link.name }}
+            <vue-feather :type="link.icon" size="20px" />
+            <span>{{ link.name }}</span>
           </div>
         </router-link>
+        <Button theme="secondary" :onClick="logout">
+          <div class="btn-body">
+            <span>Logout</span>
+            <vue-feather type="log-out" size="20px" />
+          </div>
+        </Button>
       </div>
     </div>
   </div>
@@ -80,33 +100,62 @@ function logout() {
     display: flex;
     align-items: center;
     gap: 1rem;
-    perspective: 1000px;
     z-index: 10;
+
+    .icons {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+      width: 100px;
+
+      &.hidden {
+        width: 0;
+        overflow: hidden;
+      }
+    }
 
     .menu-body {
       position: absolute;
-      top: 40px;
-      right: 60px;
+      top: -10px;
+      right: -30px;
       flex-direction: column;
-      text-align: left;
-      color: var(--bg-dark);
-      background-color: #fff;
+      text-align: center;
+      align-items: center;
+      color: #fff;
+      background-color: var(--bg-dark);
       border-radius: 8px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-      width: 120px;
+      height: 100vh;
       padding: 0.5rem;
-      min-height: 200px;
+      padding-top: 4rem;
       opacity: 0;
       visibility: hidden;
-      backface-visibility: hidden;
-      transform: rotate3d(1, 0, 0, -90deg);
-      transform-origin: 0% 0%;
+      width: 0;
       transition: all 0.3s;
+      display: flex;
+
+      a {
+        margin: 0;
+      }
 
       &.open {
         opacity: 1;
         visibility: visible;
-        transform: rotate3d(0, 0, 0, 0);
+        width: 300px;
+      }
+
+      .close-menu {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+
+      .secondary {
+        &:hover {
+          background-color: #fff;
+          color: var(--bg-dark);
+        }
       }
 
       .menu-link {
@@ -115,19 +164,21 @@ function logout() {
         border-radius: 0.2rem;
         padding: 0.3rem;
         transition: 0.3s all ease-in-out;
-        color: var(--bg-dark-light);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+
+        span {
+          margin-left: 10px;
+        }
 
         &:hover {
           cursor: pointer;
-          background-color: var(--bg-dark-light);
-          color: #fff;
+          background-color: #fff;
+          color: var(--bg-dark);
         }
       }
     }
-  }
-
-  span {
-    margin-right: 1rem;
   }
 
   a {
@@ -135,8 +186,18 @@ function logout() {
   }
 
   @media (max-width: 500px) {
-    span {
-      display: none;
+    .authenticated-nav {
+      .menu-body {
+        &.open {
+          width: 100vw;
+        }
+
+        .menu-link,
+        .secondary,
+        span {
+          font-size: larger;
+        }
+      }
     }
   }
 }
