@@ -75,6 +75,26 @@ input:focus-visible {
   font-weight: bolds;
 }
 
+.form-container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.form-container .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 50%;
+  margin-bottom: 2rem;
+}
+
 .btn-body {
   display: flex;
   align-items: center;
@@ -110,5 +130,16 @@ input:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media (max-width: 500px) {
+  .form {
+    width: 100%;
+  }
+
+  .form input,
+  button {
+    width: 100% !important;
   }
 }

@@ -40,9 +40,17 @@ export function useRegister(onSuccess?: (data: any) => void) {
     isLoading,
     isSuccess,
     mutate: registerUser,
-  } = useMutation((params: any) => register(params), {
-    onSuccess,
-  });
+  } = useMutation(
+    (params: { email: string; username: string; password: string }) =>
+      register(params),
+    {
+      onSuccess,
+      onError: (error: AxiosError) => {
+        toaster.error(errorMessages[error.response?.status || 500]);
+        console.log(error);
+      },
+    }
+  );
   return {
     isError,
     isLoading,

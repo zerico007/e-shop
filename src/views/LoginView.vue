@@ -38,51 +38,23 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="login-container">
+  <div class="form-container login">
     <h1>Welcome to E-Shop</h1>
     <form
       @submit.prevent="() => loginUser({ email, password })"
-      class="login-form"
+      class="login-form form"
     >
       <input type="email" v-model="email" placeholder="Email" />
       <input type="password" v-model="password" placeholder="Password" />
       <Button width="fit-content" type="submit" :disabled="!email && !password">
         <div class="login-btn-div btn-body">
-          <span>{{ isLoading ? "Loading..." : "Login" }}</span>
+          <span>{{ isLoading ? "Logging in..." : "Login" }}</span>
           <vue-feather :type="isLoading ? 'loader' : 'log-in'" size="20px" />
         </div>
       </Button>
     </form>
+    <router-link to="/e-shop/register/">
+      New here? Create an account with us.
+    </router-link>
   </div>
 </template>
-<style lang="scss" scoped>
-.login-container {
-  width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem auto;
-
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 50%;
-  }
-
-  @media (max-width: 500px) {
-    .login-form {
-      width: 100%;
-
-      input,
-      button {
-        width: 100% !important;
-      }
-    }
-  }
-}
-</style>

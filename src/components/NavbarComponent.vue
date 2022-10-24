@@ -14,9 +14,10 @@ function logout() {
 </script>
 <template>
   <div class="nav-bar">
-    <router-link to="/e-shop/home/">
+    <router-link :to="userStore.user.isLoggedIn ? '/e-shop/home/' : '/e-shop/'">
       <h2>E-Shop</h2>
     </router-link>
+
     <span v-if="userStore.user.isLoggedIn"
       >Welcome back, {{ userStore.user.username }}</span
     >
