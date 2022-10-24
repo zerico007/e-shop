@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { openModal, closeModal } from "../utils";
-import Modal from "./ModalComponent.vue";
 import Button from "./ButtonComponent.vue";
 import { useAddToCart } from "../api";
 
@@ -13,13 +11,20 @@ const props = defineProps<{
 
 const quantity = ref(1);
 
+const quantityOptions = Array.from(Array(10).keys()).map((i) => i + 1);
+
 const { add, isAddingToCart } = useAddToCart(handleSuccess);
 
-const modalId = `add-to-cart-modal-${props.product.id}`;
+function scrollToTopOfPage() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
 
 function handleSuccess() {
-  closeModal(modalId);
   quantity.value = 1;
+  scrollToTopOfPage();
 }
 
 function handleAddToCart() {
@@ -31,20 +36,6 @@ function handleAddToCart() {
 </script>
 <template>
   <div class="product">
-    <Modal :id="modalId">
-      <span>How many do you want to add?</span>
-      <span>{{ props.product.name }}</span>
-      <input type="number" v-model="quantity" />
-      <Button :onClick="handleAddToCart">
-        <div class="btn-body">
-          <span>{{ isAddingToCart ? "Adding..." : "Confirm" }}</span>
-          <vue-feather
-            :type="isAddingToCart ? 'loader' : 'check'"
-            size="20px"
-          />
-        </div>
-      </Button>
-    </Modal>
     <div class="product-img">
       <img
         :src="`${VITE_API_URL}/${props.product.productImage}`"
@@ -54,10 +45,21 @@ function handleAddToCart() {
     <div class="product-info">
       <h3>{{ props.product.name }}</h3>
       <p>{{ `$${props.product.price}.00` }}</p>
-      <Button theme="primary" :onClick="() => openModal(modalId)">
+      <div class="select-container">
+        <v-select
+          v-model="quantity"
+          :options="quantityOptions"
+          placeholder="Qnty"
+          :clearable="false"
+        />
+      </div>
+      <Button theme="primary" :onClick="handleAddToCart">
         <div class="btn-body add-cart-btn">
-          <span>Add to Cart</span>
-          <vue-feather type="shopping-cart" size="20px" />
+          <span>{{ isAddingToCart ? "Adding..." : "Add to Cart" }}</span>
+          <vue-feather
+            :type="isAddingToCart ? 'loader' : 'shopping-cart'"
+            size="20px"
+          />
         </div>
       </Button>
     </div>
@@ -102,6 +104,22 @@ input[type="number"] {
     justify-content: center;
     align-items: center;
     margin-left: auto;
+  }
+
+  .select-container {
+    width: 200px;
+    margin: 10px;
+    width: 80px;
+    border-radius: 0.25rem;
+    background-color: var(--bg-dark-light);
+
+    --vs-controls-color: #fff;
+    --vs-selected-color: #fff;
+    --vs-dropdown-option-color: #fff;
+    --vs-dropdown-bg: var(--bg-dark-light);
+    --vs-dropdown-option--active-bg: var(--primary-color);
+    --vs-dropdown-min-width: 80px;
+    --vs-border-color: none;
   }
 }
 

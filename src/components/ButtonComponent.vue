@@ -41,6 +41,9 @@ button {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:disabled {
     cursor: not-allowed;

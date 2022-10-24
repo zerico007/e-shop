@@ -48,11 +48,11 @@ export const useUserStore = defineStore("user", () => {
   };
 
   watch(user, (newUser) => {
-    localStorage.setItem("user", JSON.stringify(newUser));
+    sessionStorage.setItem("user", JSON.stringify(newUser));
   });
 
   onBeforeMount(() => {
-    const userInStorage = localStorage.getItem("user");
+    const userInStorage = sessionStorage.getItem("user");
     if (userInStorage) {
       user.value = JSON.parse(userInStorage);
       setBearerToken(user.value.token);

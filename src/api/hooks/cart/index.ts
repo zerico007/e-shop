@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/vue-query";
-import { getCart, addToCart } from "../../functions";
+import { getCart, addToCart, deleteFromCart } from "../../functions";
 
 export function useCart(enabled = true) {
   const {
@@ -41,5 +41,25 @@ export function useAddToCart(onSuccess?: (data?: any) => void) {
   return {
     add,
     isAddingToCart,
+  };
+}
+
+export function useDeleteFromCart(onSuccess?: (data?: any) => void) {
+  const queryClient = useQueryClient();
+
+  const { mutate: remove, isLoading: isRemovingFromCart } = useMutation(
+    (productId: string) => deleteFromCart(productId),
+    {
+      onError: (error: unknown) => console.log(error),
+      onSuccess: (data: any) => {
+        queryClient.invalidateQueries(["cart"]);
+        onSuccess?.(data);
+      },
+    }
+  );
+
+  return {
+    remove,
+    isRemovingFromCart,
   };
 }
