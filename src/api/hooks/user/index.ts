@@ -66,9 +66,13 @@ export function useUpdatePassword() {
     isSuccess,
     mutate: updateUserPassword,
   } = useMutation(
-    (params: { userId: string; oldPassword: string; newPassword: string }) => {
-      const { userId, oldPassword, newPassword } = params;
-      return updatePassword(userId, oldPassword, newPassword);
+    (params: {
+      userId: string;
+      currentPassword: string;
+      newPassword: string;
+    }) => {
+      const { userId, currentPassword, newPassword } = params;
+      return updatePassword(userId, newPassword, currentPassword);
     },
     {
       onError: (error: AxiosError) => {

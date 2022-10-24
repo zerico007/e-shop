@@ -37,7 +37,7 @@ function handleChangePassword() {
   }
   updateUserPassword({
     userId: userStore.user.userId,
-    oldPassword: currentPassword.value,
+    currentPassword: currentPassword.value,
     newPassword: newPassword.value,
   });
 }
@@ -52,11 +52,28 @@ function handleChangePassword() {
         placeholder="Current Password"
       />
       <input type="password" v-model="newPassword" placeholder="New Password" />
+      <div
+        class="password-criteria"
+        :style="{ display: !!newPassword ? 'flex' : 'none' }"
+      >
+        <div class="criterion">
+          <vue-feather
+            :type="passwordRegex.test(newPassword) ? 'check' : 'x'"
+            size="20px"
+          />
+          <span
+            >Password must have at least 8 characters, 1 uppercase, 1 digit and
+            1 special character</span
+          >
+        </div>
+      </div>
+
       <input
         type="password"
         v-model="confirmPassword"
         placeholder="Confirm Password"
       />
+
       <Button
         width="fit-content"
         :disabled="!passwordsMatch || !isStrongPassword || !isPasswordDifferent"
@@ -75,3 +92,20 @@ function handleChangePassword() {
     </form>
   </div>
 </template>
+<style scoped lang="scss">
+.password-criteria {
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+.criterion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  span {
+    font-size: 0.8rem;
+  }
+}
+</style>

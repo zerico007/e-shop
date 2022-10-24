@@ -13,9 +13,6 @@ const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 
-const passwordFocused = ref(false);
-const confirmPasswordFocused = ref(false);
-
 const passwordsMatch = computed(() => {
   if (!password.value || !confirmPassword.value) {
     return false;
@@ -53,16 +50,10 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
     <form @submit.prevent="" class="register-form form">
       <input type="text" v-model="username" placeholder="Username" />
       <input type="email" v-model="email" placeholder="Email" />
-      <input
-        type="password"
-        @focus="passwordFocused = true"
-        @blur="passwordFocused = false"
-        v-model="password"
-        placeholder="Password"
-      />
+      <input type="password" v-model="password" placeholder="Password" />
       <div
         class="password-criteria"
-        :style="{ display: passwordFocused ? 'flex' : 'none' }"
+        :style="{ display: !!password ? 'flex' : 'none' }"
       >
         <div class="criterion">
           <vue-feather
@@ -97,12 +88,10 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
         type="password"
         v-model="confirmPassword"
         placeholder="Confirm Password"
-        @focus="confirmPasswordFocused = true"
-        @blur="confirmPasswordFocused = false"
       />
       <div
         class="criterion"
-        :style="{ display: confirmPasswordFocused ? 'flex' : 'none' }"
+        :style="{ display: !!confirmPassword ? 'flex' : 'none' }"
       >
         <vue-feather :type="passwordsMatch ? 'check' : 'x'" size="20px" />
         <span>Passwords match</span>

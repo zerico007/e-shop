@@ -101,9 +101,9 @@ export const placeOrder = async () => {
 export const updatePassword = async (
   userId: string,
   newPassword: string,
-  oldPassword: string
+  currentPassword: string
 ) => {
-  const params = { newPassword, oldPassword };
+  const params = { newPassword, currentPassword };
   const { data } = await shopAPI.put(`/users/${userId}`, params);
   return data;
 };
