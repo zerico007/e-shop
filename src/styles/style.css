@@ -134,11 +134,11 @@ input:focus-visible {
 }
 
 @media (max-width: 500px) {
-  .form {
+  .form-container .form {
     width: 100%;
   }
 
-  .form input,
+  .form-container .form input,
   button {
     width: 100% !important;
   }
