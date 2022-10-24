@@ -8,7 +8,8 @@ export function usePlaceOrder(onSuccess?: (data?: any) => void) {
     {
       onError: (error: unknown) => console.log(error),
       onSuccess: (data: any) => {
-        queryClient.invalidateQueries(["orders", "cart"]);
+        queryClient.invalidateQueries(["cart"]);
+        queryClient.invalidateQueries(["orders"]);
         onSuccess?.(data);
       },
     }
