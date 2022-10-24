@@ -13,7 +13,7 @@ const password = ref("");
 const userStore = useUserStore();
 const router = useRouter();
 
-const { isError, isLoading, isSuccess, loginUser } = useLogin((data: any) => {
+const { isLoading, isSuccess, loginUser } = useLogin((data: any) => {
   userStore.setUser(data.token);
   setBearerToken(data.token);
 });
@@ -52,9 +52,6 @@ onMounted(() => {
           <vue-feather :type="isLoading ? 'loader' : 'log-in'" size="20px" />
         </div>
       </Button>
-      <div class="error">
-        <span v-if="isError">Login Error</span>
-      </div>
     </form>
   </div>
 </template>
@@ -75,10 +72,6 @@ onMounted(() => {
     align-items: center;
     gap: 1rem;
     width: 50%;
-  }
-
-  .error {
-    color: red;
   }
 
   @media (max-width: 500px) {

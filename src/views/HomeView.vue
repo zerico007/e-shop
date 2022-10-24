@@ -1,68 +1,80 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-import { useProducts } from "../api";
-import ProductsContainer from "../components/ProductsContainer.vue";
-
-const searchTerm = ref("");
-
-const { data, isLoading } = useProducts();
-
-function filterProductsBySearchTerm() {
-  return data.value?.filter((product: any) => {
-    return product.name.toLowerCase().includes(searchTerm.value.toLowerCase());
-  });
-}
+import landingPageHero from "@/assets/landing-page.jpeg";
+import Button from "../components/ButtonComponent.vue";
 </script>
 <template>
   <div class="home-container">
-    <div class="search">
-      <input type="text" v-model="searchTerm" placeholder="Search" />
-      <vue-feather type="search" size="20px" />
+    <div class="hero">
+      <img :src="landingPageHero" alt="hero" />
+      <div class="hero-text">
+        <h1 class="big-e">E</h1>
+        <h1>Shop</h1>
+        <p>Where the best come to shop apple products.</p>
+        <router-link to="/e-shop/products/">
+          <Button text="shop now" />
+        </router-link>
+      </div>
     </div>
-    <h3 v-if="isLoading">
-      <vue-feather type="loader" />
-    </h3>
-    <ProductsContainer v-else :products="filterProductsBySearchTerm()" />
   </div>
 </template>
 <style lang="scss" scoped>
 .home-container {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem auto;
+  height: 100vh;
 
-  .search {
-    margin-top: 6rem;
+  .hero {
+    width: 100%;
+    height: 100%;
     display: flex;
-    width: 40%;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: var(--bg-dark-soft);
-    border-radius: 0.5rem;
+    margin: 4rem auto;
+    position: relative;
+    background: rgba(0, 0, 0, 0.7);
 
-    &:focus-within {
-      outline: 4px auto -webkit-focus-ring-color;
+    img {
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
 
-    input {
-      background-color: transparent;
+    .hero-text {
       width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2rem auto;
+      position: relative;
+      z-index: 1;
 
-      &:focus,
-      :focus-visible {
-        outline: none;
+      h1 {
+        font-size: 10rem;
+        font-weight: 700;
+        margin: 0;
       }
-    }
-  }
 
-  @media (max-width: 768px) {
-    .search {
-      width: 80%;
+      .big-e {
+        transform: rotate(-35deg);
+      }
+
+      p {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: var(--text-light);
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      @media (max-width: 500px) {
+        h1 {
+          font-size: 7rem;
+        }
+      }
     }
   }
 }

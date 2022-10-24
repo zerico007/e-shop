@@ -14,7 +14,9 @@ function logout() {
 </script>
 <template>
   <div class="nav-bar">
-    <h2>E-Shop</h2>
+    <router-link to="/e-shop/home/">
+      <h2>E-Shop</h2>
+    </router-link>
     <span v-if="userStore.user.isLoggedIn"
       >Welcome back, {{ userStore.user.username }}</span
     >
@@ -45,7 +47,7 @@ function logout() {
     margin-right: 1rem;
   }
 
-  h2 {
+  a {
     margin-right: auto;
   }
 }

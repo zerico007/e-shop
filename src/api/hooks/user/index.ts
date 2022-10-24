@@ -1,5 +1,14 @@
 import { useMutation } from "@tanstack/vue-query";
+import { AxiosError } from "axios";
 import { login, register, updatePassword } from "../../functions";
+import { toaster } from "../../../utils";
+
+const errorMessages: Record<number, string> = {
+  401: "Invalid credentials",
+  404: "User not found",
+  409: "User already exists",
+  500: "Internal server error",
+};
 
 export function useLogin(onSuccess?: (data: any) => void) {
   const {
@@ -11,7 +20,8 @@ export function useLogin(onSuccess?: (data: any) => void) {
     (params: { email: string; password: string }) => login(params),
     {
       onSuccess,
-      onError: (error: unknown) => {
+      onError: (error: AxiosError) => {
+        toaster.error(errorMessages[error.response?.status || 500]);
         console.log(error);
       },
     }
