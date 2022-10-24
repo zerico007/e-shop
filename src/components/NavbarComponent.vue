@@ -54,10 +54,10 @@ function logout() {
       :class="isMenuOpen ? 'hidden' : ''"
     >
       <div class="icons" :class="isMenuOpen ? 'hidden' : ''">
+        <Cart />
         <Button theme="secondary" :onClick="toggleMenu">
           <vue-feather type="menu" size="20px" />
         </Button>
-        <Cart />
       </div>
 
       <div
