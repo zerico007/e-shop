@@ -42,10 +42,10 @@ function logout() {
 
     <div v-if="userStore.user.isLoggedIn" class="authenticated-nav">
       <span>Welcome back, {{ userStore.user.username }}</span>
-      <Cart />
       <Button theme="secondary" :onClick="toggleMenu">
         <vue-feather :type="isMenuOpen ? 'x' : 'menu'" size="20px" />
       </Button>
+      <Cart />
       <Button theme="secondary" :onClick="logout">
         <vue-feather type="log-out" size="20px" />
       </Button>
