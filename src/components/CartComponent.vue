@@ -21,16 +21,7 @@ const cartCount = computed(() => {
 });
 
 function toggleCartOpen() {
-  if (isCartOpen.value) {
-    const cartBody = document.querySelector(".cart-body") as HTMLElement;
-    cartBody?.classList.add("closed");
-    setTimeout(() => {
-      isCartOpen.value = false;
-      cartBody?.classList.remove("closed");
-    }, 400);
-    return;
-  }
-  isCartOpen.value = true;
+  isCartOpen.value = !isCartOpen.value;
 }
 </script>
 <template>
@@ -43,7 +34,7 @@ function toggleCartOpen() {
     <div class="cart-badge">
       <span>{{ cartCount }}</span>
     </div>
-    <div class="cart-body" :style="{ display: isCartOpen ? 'flex' : 'none' }">
+    <div class="cart-body" :class="isCartOpen ? 'open' : ''">
       <div v-if="isCartEmpty" class="cart-empty">
         <span>Your cart is empty!</span>
         <span>Fill it with awesome things you love!</span>
@@ -97,6 +88,7 @@ function toggleCartOpen() {
 
   .cart-body {
     position: absolute;
+    display: flex;
     top: 40px;
     right: 0;
     flex-direction: column;
@@ -108,11 +100,15 @@ function toggleCartOpen() {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     width: 400px;
     min-height: 400px;
-    animation: enterTopRight 0.4s ease-in-out;
+    opacity: 0;
+    transform: translate(-2.5rem, -2.5rem) scale(0);
     transform-origin: 100% 0%;
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
 
-    &.closed {
-      animation: exitTopRight 0.4s ease-in-out;
+    &.open {
+      opacity: 1;
+      transform: translate(0) scale(1);
     }
 
     h3 {

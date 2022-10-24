@@ -10,7 +10,7 @@ export const getOrders = async (role: "administrator" | "customer") => {
   const url = role === "administrator" ? "/orders/admin" : "/orders";
   const { data } = await shopAPI.get(url);
   if (data.orders) {
-    return data.orders.reverse();
+    return data.orders.map(({ order }: any) => ({ ...order })).reverse();
   }
   return [];
 };

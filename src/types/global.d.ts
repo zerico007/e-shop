@@ -24,5 +24,22 @@ interface Cart {
   message?: string;
 }
 
+interface OrderItem {
+  product: string;
+  quantity: number;
+  total: number;
+  unitPrice: number;
+  productId: string;
+  productImage: string;
+}
+
+interface Order {
+  id: string;
+  user: string;
+  items: OrderItem[];
+  OrderTotal: string;
+  dateCreated: string;
+}
+
 declare module "vue-select";
 declare module "@meforma/vue-toaster";

@@ -59,20 +59,30 @@ export function useRegister(onSuccess?: (data: any) => void) {
   };
 }
 
-export function useUpdatePassword(
-  userId: string,
-  oldPassword: string,
-  newPassword: string
-) {
+export function useUpdatePassword() {
   const {
     isError,
-    isLoading,
+    isLoading: isUpdatingPassword,
     isSuccess,
     mutate: updateUserPassword,
-  } = useMutation(() => updatePassword(userId, oldPassword, newPassword));
+  } = useMutation(
+    (params: { userId: string; oldPassword: string; newPassword: string }) => {
+      const { userId, oldPassword, newPassword } = params;
+      return updatePassword(userId, oldPassword, newPassword);
+    },
+    {
+      onError: (error: AxiosError) => {
+        toaster.error(errorMessages[error.response?.status || 500]);
+        console.log(error);
+      },
+      onSuccess: () => {
+        toaster.success("Password updated");
+      },
+    }
+  );
   return {
     isError,
-    isLoading,
+    isUpdatingPassword,
     isSuccess,
     updateUserPassword,
   };

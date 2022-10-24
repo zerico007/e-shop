@@ -1,4 +1,4 @@
-import { ref, watch, onBeforeMount } from "vue";
+import { ref, watch, onBeforeMount, Ref } from "vue";
 import { defineStore } from "pinia";
 import jwt_decode from "jwt-decode";
 import { setBearerToken } from "../api";
@@ -7,17 +7,17 @@ interface User {
   userId: string;
   email: string;
   username: string;
-  role: string;
+  role: "administrator" | "customer";
   token: string;
   isLoggedIn: boolean;
 }
 
 export const useUserStore = defineStore("user", () => {
-  const user = ref({
+  const user: Ref<User> = ref({
     userId: "",
     email: "",
     username: "",
-    role: "",
+    role: "" as "administrator" | "customer",
     token: "",
     isLoggedIn: false,
   });
@@ -41,7 +41,7 @@ export const useUserStore = defineStore("user", () => {
       userId: "",
       email: "",
       username: "",
-      role: "",
+      role: "" as "administrator" | "customer",
       token: "",
       isLoggedIn: false,
     };

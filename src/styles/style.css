@@ -140,6 +140,6 @@ input:focus-visible {
 
   .form-container .form input,
   button {
-    width: 100% !important;
+    width: 100%;
   }
 }
