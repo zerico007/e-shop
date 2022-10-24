@@ -59,6 +59,7 @@ button {
   }
   &.secondary {
     background-color: var(--bg-dark);
+    color: #fff;
     border: none;
 
     &:hover {

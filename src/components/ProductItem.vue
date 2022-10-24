@@ -88,7 +88,7 @@ input[type="number"] {
     align-items: center;
     img {
       width: 100%;
-      max-width: 250px;
+      max-width: 200px;
       object-fit: cover;
 
       &:hover {
