@@ -23,6 +23,11 @@ const cartCount = computed(() => {
 function toggleCartOpen() {
   isCartOpen.value = !isCartOpen.value;
 }
+
+function onClickAway() {
+  if (!isCartOpen.value) return;
+  isCartOpen.value = false;
+}
 </script>
 <template>
   <div class="cart-container">
@@ -34,7 +39,11 @@ function toggleCartOpen() {
     <div class="cart-badge">
       <span>{{ cartCount }}</span>
     </div>
-    <div class="cart-body" :class="isCartOpen ? 'open' : ''">
+    <div
+      class="cart-body"
+      v-click-away="isCartOpen && onClickAway"
+      :class="isCartOpen ? 'open' : ''"
+    >
       <div v-if="isCartEmpty" class="cart-empty">
         <span>Your cart is empty!</span>
         <span>Fill it with awesome things you love!</span>

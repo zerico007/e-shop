@@ -1616,6 +1616,11 @@ vue-tsc@^0.40.4:
     "@volar/vue-language-core" "0.40.13"
     "@volar/vue-typescript" "0.40.13"
 
+vue3-click-away@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/vue3-click-away/-/vue3-click-away-1.2.4.tgz#ee76a241e7cff2a345e14342d558f4801d14cc26"
+  integrity sha512-O9Z2KlvIhJT8OxaFy04eiZE9rc1Mk/bp+70dLok68ko3Kr8AW5dU+j8avSk4GDQu94FllSr4m5ul4BpzlKOw1A==
+
 vue@^2.0.0:
   version "2.7.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.7.13.tgz#e9e499cc6da46dc7941c2510193b15aa6a84a79f"

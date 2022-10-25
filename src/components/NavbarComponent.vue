@@ -37,6 +37,11 @@ function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
 }
 
+function onClickAway() {
+  if (!isMenuOpen.value) return;
+  isMenuOpen.value = false;
+}
+
 function logout() {
   userStore.logout();
   router.push("/e-shop/");
@@ -63,6 +68,7 @@ function logout() {
       <div
         :class="isMenuOpen ? 'menu-body open' : 'menu-body'"
         @click="toggleMenu"
+        v-click-away="isMenuOpen && onClickAway"
       >
         <vue-feather class="close-menu" type="x" size="30px" />
         <span>Welcome back, {{ userStore.user.username }}</span>
