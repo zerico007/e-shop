@@ -9,9 +9,14 @@ import { toaster } from "../utils";
 
 const email = ref("");
 const password = ref("");
+const isPasswordVisible = ref(false);
 
 const userStore = useUserStore();
 const router = useRouter();
+
+const togglePasswordVisibility = () => {
+  isPasswordVisible.value = !isPasswordVisible.value;
+};
 
 const { isLoading, isSuccess, loginUser } = useLogin((data: any) => {
   userStore.setUser(data.token);
@@ -45,8 +50,21 @@ onMounted(() => {
       class="login-form form"
     >
       <input type="email" v-model="email" placeholder="Email" />
-      <input type="password" v-model="password" placeholder="Password" />
-      <Button width="fit-content" type="submit" :disabled="!email && !password">
+      <div class="login-password">
+        <vue-feather
+          v-if="!!password"
+          :type="isPasswordVisible ? 'eye-off' : 'eye'"
+          size="20px"
+          @click="togglePasswordVisibility"
+        />
+        <input
+          :type="isPasswordVisible ? 'text' : 'password'"
+          v-model="password"
+          placeholder="Password"
+        />
+      </div>
+
+      <Button type="submit" :disabled="!email && !password">
         <div class="login-btn-div btn-body">
           <span>{{ isLoading ? "Logging in..." : "Login" }}</span>
           <vue-feather :type="isLoading ? 'loader' : 'log-in'" size="20px" />
@@ -58,3 +76,4 @@ onMounted(() => {
     </router-link>
   </div>
 </template>
+<style lang="scss" scope></style>

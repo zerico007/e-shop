@@ -25,6 +25,23 @@
   -webkit-text-size-adjust: 100%;
 }
 
+::-ms-reveal {
+  display: none;
+}
+
+.login-password {
+  position: relative;
+}
+
+.login-password .feather {
+  color: #fff;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
