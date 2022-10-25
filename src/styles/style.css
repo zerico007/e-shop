@@ -29,11 +29,11 @@
   display: none;
 }
 
-.login-password {
+.password-input-box {
   position: relative;
 }
 
-.login-password .feather {
+.password-input-box .feather {
   color: #fff;
   position: absolute;
   right: 10px;

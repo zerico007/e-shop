@@ -14,7 +14,7 @@ const togglePasswordVisibility = () => {
 };
 </script>
 <template>
-  <div class="login-password">
+  <div class="password-input-box">
     <vue-feather
       v-if="!!props.value"
       :type="isPasswordVisible ? 'eye-off' : 'eye'"
