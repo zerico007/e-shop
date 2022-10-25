@@ -123,7 +123,7 @@ function logout() {
     .menu-body {
       position: absolute;
       top: -10px;
-      right: -30px;
+      right: 20px;
       flex-direction: column;
       text-align: center;
       align-items: center;
@@ -137,7 +137,7 @@ function logout() {
       opacity: 0;
       visibility: hidden;
       width: 0;
-      transition: all 0.3s;
+      transition: all 0.3s ease-in-out;
       display: flex;
 
       a {
@@ -148,6 +148,7 @@ function logout() {
         opacity: 1;
         visibility: visible;
         width: 300px;
+        right: -32px;
       }
 
       .close-menu {

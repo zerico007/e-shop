@@ -30,7 +30,7 @@ function onClickAway() {
 }
 </script>
 <template>
-  <div class="cart-container">
+  <div class="cart-container" v-click-away="isCartOpen && onClickAway">
     <div class="cart-icon-btn">
       <Button :onClick="toggleCartOpen" theme="secondary">
         <vue-feather type="shopping-cart" size="20px" />
@@ -39,11 +39,7 @@ function onClickAway() {
     <div class="cart-badge">
       <span>{{ cartCount }}</span>
     </div>
-    <div
-      class="cart-body"
-      v-click-away="isCartOpen && onClickAway"
-      :class="isCartOpen ? 'open' : ''"
-    >
+    <div class="cart-body" :class="isCartOpen ? 'open' : ''">
       <div v-if="isCartEmpty" class="cart-empty">
         <span>Your cart is empty!</span>
         <span>Fill it with awesome things you love!</span>
