@@ -1,13 +1,21 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import Button from "./ButtonComponent.vue";
+import Modal from "./ModalComponent.vue";
+import EditProductForm from "./EditProductForm.vue";
 import { useAddToCart } from "../api";
+import { useUserStore } from "../store";
+import { openModal, closeModal } from "../utils";
 
 const VITE_API_URL = import.meta.env.VITE_API;
+
+const userStore = useUserStore();
 
 const props = defineProps<{
   product: Product;
 }>();
+
+const modalId = `edit-product-${props.product.id}`;
 
 const quantity = ref(1);
 
@@ -36,6 +44,9 @@ function handleAddToCart() {
 </script>
 <template>
   <div class="product">
+    <Modal :id="modalId">
+      <EditProductForm :product="product" />
+    </Modal>
     <div class="product-img">
       <img
         :src="`${VITE_API_URL}/${props.product.productImage}`"
@@ -45,6 +56,13 @@ function handleAddToCart() {
     <div class="product-info">
       <h3>{{ props.product.name }}</h3>
       <p>{{ `$${props.product.price}.00` }}</p>
+      <!-- <iframe
+        width="560"
+        height="315"
+        :src="props.product.videoURL"
+        frameborder="0"
+        allowfullscreen
+      ></iframe> -->
       <div class="select-container">
         <v-select
           v-model="quantity"
@@ -60,6 +78,17 @@ function handleAddToCart() {
             :type="isAddingToCart ? 'loader' : 'shopping-cart'"
             size="20px"
           />
+        </div>
+      </Button>
+      <Button
+        style="margin-top: 1rem"
+        v-if="userStore.user.role === 'administrator'"
+        theme="primary"
+        :onClick="() => openModal(modalId)"
+      >
+        <div class="btn-body edit-btn">
+          <span>Edit</span>
+          <vue-feather type="edit" size="20px" />
         </div>
       </Button>
     </div>
@@ -79,7 +108,7 @@ input[type="number"] {
   border-radius: 5px;
   padding: 1rem;
   display: flex;
-  height: 275px;
+  height: 300px;
 
   .product-img {
     width: 50%;
@@ -104,6 +133,10 @@ input[type="number"] {
     justify-content: center;
     align-items: center;
     margin-left: auto;
+
+    p {
+      margin: 0;
+    }
   }
 
   .select-container {

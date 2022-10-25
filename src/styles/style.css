@@ -105,6 +105,7 @@ input:focus-visible {
 
 .btn-body span {
   font-weight: bolder;
+  margin-right: 10px;
 }
 
 .btn-body:hover i {
