@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 import Button from "../components/ButtonComponent.vue";
+import Password from "../components/PasswordComponent.vue";
+
 import { useUserStore } from "../store";
 import { useUpdatePassword } from "../api";
 
@@ -11,6 +13,18 @@ const { isUpdatingPassword, updateUserPassword } = useUpdatePassword();
 const newPassword = ref("");
 const confirmPassword = ref("");
 const currentPassword = ref("");
+
+const handleNewPasswordChange = (event: Event) => {
+  newPassword.value = (event.target as HTMLInputElement).value;
+};
+
+const handleConfirmPasswordChange = (event: Event) => {
+  confirmPassword.value = (event.target as HTMLInputElement).value;
+};
+
+const handleCurrentPasswordChange = (event: Event) => {
+  currentPassword.value = (event.target as HTMLInputElement).value;
+};
 
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
@@ -46,12 +60,16 @@ function handleChangePassword() {
   <div class="form-container change-password">
     <h1>Change Password</h1>
     <form class="form password-change-form">
-      <input
-        type="password"
-        v-model="currentPassword"
+      <Password
+        :value="currentPassword"
         placeholder="Current Password"
+        :onChange="handleCurrentPasswordChange"
       />
-      <input type="password" v-model="newPassword" placeholder="New Password" />
+      <Password
+        :value="newPassword"
+        placeholder="New Password"
+        :onChange="handleNewPasswordChange"
+      />
       <div
         class="password-criteria"
         :style="{ display: !!newPassword ? 'flex' : 'none' }"
@@ -67,13 +85,18 @@ function handleChangePassword() {
           >
         </div>
       </div>
-
-      <input
-        type="password"
-        v-model="confirmPassword"
+      <Password
+        :value="confirmPassword"
         placeholder="Confirm Password"
+        :onChange="handleConfirmPasswordChange"
       />
-
+      <div
+        class="criterion"
+        :style="{ display: !!confirmPassword ? 'flex' : 'none' }"
+      >
+        <vue-feather :type="passwordsMatch ? 'check' : 'x'" size="20px" />
+        <span>Passwords match</span>
+      </div>
       <Button
         width="fit-content"
         :disabled="!passwordsMatch || !isStrongPassword || !isPasswordDifferent"

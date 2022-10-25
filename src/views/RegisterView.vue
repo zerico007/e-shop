@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import Button from "../components/ButtonComponent.vue";
+import Password from "../components/PasswordComponent.vue";
 import { useRegister } from "../api";
 import { toaster } from "../utils";
 
@@ -12,6 +13,14 @@ const username = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
+
+const handlePasswordChange = (event: Event) => {
+  password.value = (event.target as HTMLInputElement).value;
+};
+
+const handleConfimPasswordChange = (event: Event) => {
+  confirmPassword.value = (event.target as HTMLInputElement).value;
+};
 
 const passwordsMatch = computed(() => {
   if (!password.value || !confirmPassword.value) {
@@ -50,7 +59,11 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
     <form @submit.prevent="" class="register-form form">
       <input type="text" v-model="username" placeholder="Username" />
       <input type="email" v-model="email" placeholder="Email" />
-      <input type="password" v-model="password" placeholder="Password" />
+      <Password
+        :value="password"
+        placeholder="Password"
+        :onChange="handlePasswordChange"
+      />
       <div
         class="password-criteria"
         :style="{ display: !!password ? 'flex' : 'none' }"
@@ -84,10 +97,10 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
           <span>At least 1 digit</span>
         </div>
       </div>
-      <input
-        type="password"
-        v-model="confirmPassword"
+      <Password
+        :value="confirmPassword"
         placeholder="Confirm Password"
+        :onChange="handleConfimPasswordChange"
       />
       <div
         class="criterion"

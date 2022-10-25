@@ -3,19 +3,19 @@ import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
 import Button from "../components/ButtonComponent.vue";
+import Password from "../components/PasswordComponent.vue";
 import { useLogin, setBearerToken } from "../api";
 import { useUserStore } from "../store";
 import { toaster } from "../utils";
 
 const email = ref("");
 const password = ref("");
-const isPasswordVisible = ref(false);
 
 const userStore = useUserStore();
 const router = useRouter();
 
-const togglePasswordVisibility = () => {
-  isPasswordVisible.value = !isPasswordVisible.value;
+const handlePasswordChange = (event: Event) => {
+  password.value = (event.target as HTMLInputElement).value;
 };
 
 const { isLoading, isSuccess, loginUser } = useLogin((data: any) => {
@@ -50,20 +50,11 @@ onMounted(() => {
       class="login-form form"
     >
       <input type="email" v-model="email" placeholder="Email" />
-      <div class="login-password">
-        <vue-feather
-          v-if="!!password"
-          :type="isPasswordVisible ? 'eye-off' : 'eye'"
-          size="20px"
-          @click="togglePasswordVisibility"
-        />
-        <input
-          :type="isPasswordVisible ? 'text' : 'password'"
-          v-model="password"
-          placeholder="Password"
-        />
-      </div>
-
+      <Password
+        :value="password"
+        placeholder="Password"
+        :onChange="handlePasswordChange"
+      />
       <Button type="submit" :disabled="!email && !password">
         <div class="login-btn-div btn-body">
           <span>{{ isLoading ? "Logging in..." : "Login" }}</span>
