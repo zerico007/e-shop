@@ -33,6 +33,12 @@
   position: relative;
 }
 
+@media (max-width: 500px) {
+  .password-input-box {
+    width: 100%;
+  }
+}
+
 .password-input-box .feather {
   color: #fff;
   position: absolute;
