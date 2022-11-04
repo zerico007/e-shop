@@ -135,8 +135,9 @@ function logout() {
       padding: 0.5rem;
       padding-top: 4rem;
       opacity: 0;
-      visibility: hidden;
-      width: 0;
+      width: 300px;
+      transform-origin: 100% 20%;
+      transform: translate(-2.5rem, -2.5rem) scale(0);
       transition: all 0.3s ease-in-out;
       display: flex;
 
@@ -146,8 +147,7 @@ function logout() {
 
       &.open {
         opacity: 1;
-        visibility: visible;
-        width: 300px;
+        transform: translate(0) scale(1);
         right: -32px;
       }
 
