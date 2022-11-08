@@ -71,9 +71,8 @@ onMounted(() => {
 .login {
   background-image: url("../assets/login.svg");
   background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: 50%;
-  background-attachment: fixed;
+  background-position: 10% 90%;
+  background-size: 40%;
   min-height: 100vh;
   width: 100%;
   justify-content: flex-start;

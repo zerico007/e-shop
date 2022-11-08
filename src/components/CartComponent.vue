@@ -129,12 +129,12 @@ function onClickAway() {
       text-align: center;
       margin: auto 0;
       height: 400px;
+      width: 100%;
       font-weight: bold;
       background-image: url("../assets/empty-cart.svg");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 70%;
-      background-attachment: fixed;
 
       @media (max-width: 768px) {
         background-size: 50%;

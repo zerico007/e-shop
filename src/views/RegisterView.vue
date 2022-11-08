@@ -128,9 +128,8 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
 .register {
   background-image: url("../assets/account-access.svg");
   background-repeat: no-repeat;
-  background-position: left bottom;
+  background-position: 10% 90%;
   background-size: 30%;
-  background-attachment: fixed;
   min-height: 100vh;
   width: 100%;
   justify-content: flex-start;
