@@ -141,7 +141,7 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
   }
   @media (max-width: 500px) {
     background-size: 50%;
-    background-position: 50% 75%;
+    background-position: 50% 80%;
   }
   @media (max-height: 700px) {
     background-size: 35%;
