@@ -124,10 +124,17 @@ function onClickAway() {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      padding: 1rem;
       text-align: center;
       margin: auto 0;
+      height: 400px;
       font-weight: bold;
+      background-image: url("../assets/empty-cart.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+      background-attachment: fixed;
     }
 
     .cart-items {

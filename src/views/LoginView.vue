@@ -67,4 +67,21 @@ onMounted(() => {
     </router-link>
   </div>
 </template>
-<style lang="scss" scope></style>
+<style lang="scss" scope>
+.login {
+  background-image: url("../assets/login.svg");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 50%;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    background-position: bottom;
+    background-image: url("../assets/mobile-login.svg");
+  }
+}
+</style>

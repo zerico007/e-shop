@@ -116,6 +116,24 @@ function handleChangePassword() {
   </div>
 </template>
 <style scoped lang="scss">
+.change-password {
+  background-image: url("../assets/my-password.svg");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 30%;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    background-position: bottom;
+  }
+  @media (max-width: 500px) {
+    background-size: 50%;
+  }
+}
 .password-criteria {
   flex-direction: column;
   gap: 0.5rem;
