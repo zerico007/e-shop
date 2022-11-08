@@ -135,6 +135,10 @@ function onClickAway() {
       background-position: center;
       background-size: 70%;
       background-attachment: fixed;
+
+      @media (max-width: 768px) {
+        background-size: 50%;
+      }
     }
 
     .cart-items {

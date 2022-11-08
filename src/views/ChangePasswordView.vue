@@ -128,10 +128,14 @@ function handleChangePassword() {
 
   @media (max-width: 768px) {
     width: 80%;
-    background-position: bottom;
+    background-position: 50% 75%;
   }
   @media (max-width: 500px) {
     background-size: 50%;
+  }
+  @media (max-height: 700px) {
+    background-size: 35%;
+    background-position: 50% 95%;
   }
 }
 .password-criteria {

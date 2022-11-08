@@ -80,8 +80,13 @@ onMounted(() => {
 
   @media (max-width: 768px) {
     width: 80%;
-    background-position: bottom;
+    background-position: 50% 75%;
     background-image: url("../assets/mobile-login.svg");
+  }
+
+  @media (max-height: 700px) {
+    background-size: 35%;
+    background-position: 50% 95%;
   }
 }
 </style>
