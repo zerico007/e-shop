@@ -147,6 +147,10 @@ const { isLoading, registerUser } = useRegister(onRegisterSuccess);
     background-size: 35%;
     background-position: 50% 95%;
   }
+  @media (max-height: 500px) {
+    background-position: 5% 60%;
+    background-size: 20%;
+  }
 }
 .password-criteria {
   flex-direction: column;
