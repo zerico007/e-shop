@@ -109,6 +109,12 @@ input[type="number"] {
   padding: 1rem;
   display: flex;
   height: 300px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    scale: 1.05;
+    border: 3px solid var(--accent-color);
+  }
 
   .product-img {
     width: 50%;
