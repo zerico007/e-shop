@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Login from "../views/LoginView.vue";
+import { useUserStore } from "../store";
 
 const routes = [
   {
-    path: "/e-shop",
+    path: "/e-shop/",
     name: "Login",
     component: Login,
   },
@@ -38,6 +39,13 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach(async (to) => {
+  const userStore = useUserStore();
+  if (!userStore.user.isLoggedIn && to.name !== "Login") {
+    return { name: "Login" };
+  }
 });
 
 export default router;
