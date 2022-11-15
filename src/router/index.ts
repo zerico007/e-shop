@@ -34,6 +34,11 @@ const routes = [
     name: "ChangePassword",
     component: () => import("../views/ChangePasswordView.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("../views/NotFoundView.vue"),
+  },
 ];
 
 const router = createRouter({
