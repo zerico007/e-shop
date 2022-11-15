@@ -2,7 +2,7 @@
   "name": "e-shop",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://luminous-toffee-470151.netlify.app",
+  "homepage": "https://zerico007.github.io/e-shop",
   "type": "module",
   "scripts": {
     "dev": "vite",
