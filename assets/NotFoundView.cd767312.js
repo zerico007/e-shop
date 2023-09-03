@@ -1,0 +1,1 @@
+import{m as o,a as t,o as s,p as _,j as c,b as a}from"./index.90fd23eb.js";const d={},n=e=>(_("data-v-d0eea27b"),e=e(),c(),e),p={class:"not-found"},r=n(()=>a("p",null,"Sorry, the page you were looking for could not be found.",-1)),u=[r];function i(e,l){return s(),t("div",p,u)}const h=o(d,[["render",i],["__scopeId","data-v-d0eea27b"]]);export{h as default};
